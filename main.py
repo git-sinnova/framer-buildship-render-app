@@ -3,7 +3,6 @@ from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
 
-# Load .env file
 load_dotenv()
 
 app = FastAPI()
@@ -12,6 +11,10 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+@app.get("/")
+async def root():
+    return {"message": "FastAPI + Supabase app is running!"}
 
 @app.post("/form")
 async def handle_form(request: Request):
